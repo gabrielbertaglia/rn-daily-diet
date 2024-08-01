@@ -1,30 +1,30 @@
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
-} from "@react-navigation/native-stack";
-import { Home } from "../screens/home";
+} from '@react-navigation/native-stack'
+import { Home } from '../screens/home'
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator()
 
 type ScreenProps = {
-  name: string;
-  component: React.ComponentType<any>;
-  options?: NativeStackNavigationOptions;
-};
+  name: string
+  component: React.ComponentType
+  options?: NativeStackNavigationOptions
+}
 
 const screens: ScreenProps[] = [
   {
-    name: "home",
+    name: 'home',
     component: Home,
   },
-];
+]
 
 export function AppRoutes() {
   return (
     <Navigator>
       {screens.map(({ name, component }) => {
-        return <Screen key={name} name={name} component={component} />;
+        return <Screen key={name} name={name} component={component} />
       })}
     </Navigator>
-  );
+  )
 }
