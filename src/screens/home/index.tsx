@@ -1,10 +1,11 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 import { useTheme } from "styled-components/native";
+import { Container } from "./styles";
 
 export function Home() {
   const theme = useTheme();
   return (
-    <View>
+    <Container>
       <Text
         style={{
           fontFamily: theme["font-family"].bold,
@@ -12,6 +13,6 @@ export function Home() {
       >
         Home
       </Text>
-    </View>
+    </Container>
   );
 }
