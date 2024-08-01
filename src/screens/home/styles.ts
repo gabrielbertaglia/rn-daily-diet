@@ -5,3 +5,23 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.color['gray-700']};
   padding: 24px;
 `
+
+export const HeaderContent = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 30px;
+`
+
+export const Logo = styled.Image`
+  width: 82px;
+  height: 37px;
+`
+export const Avatar = styled.Image`
+  width: 40px;
+  height: 40px;
+  border: 2px solid ${({ theme }) => theme.color['gray-200']};
+  border-radius: 999px;
+  filter: grayscale(100%);
+`

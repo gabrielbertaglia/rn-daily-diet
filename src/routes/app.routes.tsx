@@ -21,7 +21,11 @@ const screens: ScreenProps[] = [
 
 export function AppRoutes() {
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       {screens.map(({ name, component }) => {
         return <Screen key={name} name={name} component={component} />
       })}

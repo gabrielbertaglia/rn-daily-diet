@@ -11,7 +11,7 @@ export default {
     'gray-700': '#FAFAFA',
 
     'green-dark': '#639339',
-    green: '##CBE4B4',
+    green: '#CBE4B4',
     'green-light': '#E5F0DB',
 
     'red-dark': '#BF3B44',
@@ -23,11 +23,16 @@ export default {
     bold: 'NunitoSans_700Bold',
   },
   'font-size': {
-    xs: 12,
-    sm: 14,
-    md: 16,
-    lg: 18,
-    xl: 24,
-    xxl: 32,
+    title: {
+      xs: '14px',
+      s: '18px',
+      m: '24px',
+      g: '32px',
+    },
+    body: {
+      xs: '12px',
+      s: '14px',
+      m: '16px',
+    },
   },
 }
