@@ -25,3 +25,15 @@ export const Avatar = styled.Image`
   border-radius: 999px;
   filter: grayscale(100%);
 `
+
+export const NewMealContent = styled.View`
+  padding-top: 40px;
+  gap: 12px;
+`
+
+export const DayList = styled.View`
+  /* padding-top: 4px; */
+  margin-top: 16px;
+  /* gap: 12px; */
+  flex: 1;
+`
