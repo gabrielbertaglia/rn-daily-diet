@@ -1,17 +1,19 @@
-import { compareAsc } from 'date-fns'
+import { compareDesc, parse } from 'date-fns'
 import { meals } from './meals'
 
-export const listMeal: {
-  date: string
-  meals: {
-    id: string
-    name: string
-    time: string
-    onADiet: boolean
-  }[]
-}[] = []
+interface Meal {
+  id: string
+  name: string
+  time: string
+  onADiet: boolean
+}
 
-const result = meals.reduce((acc, current) => {
+interface MealGroup {
+  date: string
+  meals: Meal[]
+}
+
+export const listMeal = meals.reduce<MealGroup[]>((acc, current) => {
   const existingDate = acc.find((item) => item.date === current.date)
   if (existingDate) {
     existingDate.meals.push({
@@ -33,11 +35,11 @@ const result = meals.reduce((acc, current) => {
       ],
     })
   }
-  return acc.sort((a, b) => compareAsc(new Date(a.date), new Date(b.date)))
-}, listMeal)
+  return acc
+}, [])
 
-const sortedResult = [...result].sort((a, b) =>
-  compareAsc(new Date(a.date), new Date(b.date)),
-)
-
-console.log('sortedResult', sortedResult)
+listMeal.sort((a, b) => {
+  const dateA = parse(a.date, 'dd/MM/yyyy', new Date())
+  const dateB = parse(b.date, 'dd/MM/yyyy', new Date())
+  return compareDesc(dateA, dateB)
+})

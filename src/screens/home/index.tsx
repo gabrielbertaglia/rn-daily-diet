@@ -18,7 +18,6 @@ import {
 } from './styles'
 
 export function Home() {
-  console.log(listMeal)
   return (
     <Container>
       <HeaderContent>
@@ -49,6 +48,7 @@ export function Home() {
         <FlatList
           data={listMeal}
           renderItem={({ item }) => <DayListCard listMeal={item} />}
+          showsVerticalScrollIndicator={false}
         />
       </DayList>
     </Container>

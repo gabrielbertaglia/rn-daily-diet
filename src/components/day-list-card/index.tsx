@@ -17,7 +17,6 @@ interface DayListCardProps {
 
 export function DayListCard({ listMeal }: DayListCardProps) {
   const { date, meals } = listMeal
-  console.log('date', listMeal)
   return (
     <Container>
       <View
