@@ -2,11 +2,18 @@ import { Paragraph } from '@components/paragraph'
 import { Title } from '@components/title'
 import { Container } from './styles'
 
-export function AnalyticsContent() {
+interface AnalyticsContentProps {
+  title: string
+  subtitle: string
+}
+
+export function AnalyticsContent({ subtitle, title }: AnalyticsContentProps) {
   return (
     <Container>
-      <Title fontSize="g">90,86%</Title>
-      <Paragraph fontSize="s">das refeições dentro da dieta</Paragraph>
+      <Title fontSize="g">{title}</Title>
+      <Paragraph fontSize="s" color="gray-200">
+        {subtitle}
+      </Paragraph>
     </Container>
   )
 }

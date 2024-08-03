@@ -1,8 +1,14 @@
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 
-export const Container = styled.View`
+interface ContainerStyleProps {
+  leftOrRight: 'left' | 'right'
+}
+
+export const Container = styled.View<ContainerStyleProps>`
   position: absolute;
   padding: 4px;
-  right: 8px;
   top: 8px;
+  ${({ leftOrRight }) => css`
+    ${leftOrRight === 'left' ? 'left: 8px;' : 'right: 8px;'};
+  `}
 `

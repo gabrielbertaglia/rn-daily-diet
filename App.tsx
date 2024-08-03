@@ -4,10 +4,10 @@ import {
   NunitoSans_700Bold,
   useFonts,
 } from '@expo-google-fonts/nunito-sans'
+import { Statistics } from '@screens/statistics'
 import { Text, View } from 'react-native'
 import theme from 'src/theme'
 import { ThemeProvider } from 'styled-components'
-import { Routes } from './src/routes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,7 +17,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {fontsLoaded ? (
-        <Routes />
+        // <Routes />
+        <Statistics />
       ) : (
         <View>
           <Text>Carregando</Text>

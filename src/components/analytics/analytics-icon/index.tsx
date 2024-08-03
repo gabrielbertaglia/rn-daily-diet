@@ -7,11 +7,14 @@ export type ColorAnalyticsIconType = 'red-dark' | 'green-dark'
 interface AnalyticsIconProps {
   color?: ColorAnalyticsIconType
   icon: NativeTarget
+
+  leftOrRight?: 'left' | 'right'
 }
 
 export function AnalyticsAction({
   color = 'green-dark',
   icon: IconTarget,
+  leftOrRight = 'right',
 }: AnalyticsIconProps) {
   const Icon = styled(IconTarget).attrs({
     size: 24,
@@ -19,7 +22,7 @@ export function AnalyticsAction({
   })``
 
   return (
-    <Container>
+    <Container leftOrRight={leftOrRight}>
       <Icon />
     </Container>
   )

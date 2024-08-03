@@ -26,7 +26,10 @@ export function Home() {
       </HeaderContent>
 
       <Analytics.Root color="green-light">
-        <Analytics.Content />
+        <Analytics.Content
+          title="90,86%"
+          subtitle="das refeições dentro da dieta"
+        />
         <Analytics.Action icon={ArrowUpRight} color="green-dark" />
       </Analytics.Root>
 
