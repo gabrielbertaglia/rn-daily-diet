@@ -1,16 +1,15 @@
 import { Paragraph } from '@components/paragraph'
 import { Title } from '@components/title'
-import { Container, Diet } from './styles'
+import { Container } from './styles'
 
-interface CardDietProps {
-  diet: Diet
+interface CardProps {
   title: string
   description: string
 }
 
-export function CardDiet({ diet, description, title }: CardDietProps) {
+export function Card({ title, description }: CardProps) {
   return (
-    <Container diet={diet}>
+    <Container>
       <Title fontSize="m">{title}</Title>
       <Paragraph
         color="gray-200"

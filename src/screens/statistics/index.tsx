@@ -1,4 +1,5 @@
 import { Analytics } from '@components/analytics'
+import { Card } from '@components/card'
 import { CardDiet } from '@components/card-diet'
 import { Title } from '@components/title'
 import ArrowLeft from 'phosphor-react-native/src/icons/ArrowLeft'
@@ -17,21 +18,19 @@ export function Statistics() {
         </Analytics.Root>
       </Header>
       <Content>
-        <Title fontSize="xs">Estatísticas gerais</Title>
-        <Analytics.Root
+        <Title
+          fontSize="xs"
           style={{
-            marginTop: 24,
             marginBottom: 12,
           }}
         >
-          <Analytics.Content
-            title="22"
-            subtitle="melhor sequência de pratos dentro da dieta"
-          />
-        </Analytics.Root>
-        <Analytics.Root>
-          <Analytics.Content title="109" subtitle="refeições registradas" />
-        </Analytics.Root>
+          Estatísticas gerais
+        </Title>
+        <Card
+          title="22"
+          description="melhor sequência de pratos dentro da dieta"
+        />
+        <Card title="109" description="refeições registradas" />
       </Content>
       <ContentTotalMeal>
         <CardDiet

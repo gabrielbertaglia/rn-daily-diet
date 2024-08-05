@@ -12,6 +12,7 @@ export const Header = styled.View`
 export const Content = styled.View`
   padding: 32px 24px 12px;
   align-items: center;
+  gap: 12px;
 `
 
 export const ContentTotalMeal = styled.View`

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export type Diet = 'inside' | 'outside'
+export type Diet = 'inside' | 'outside' | 'normal'
 
 interface ContainerProps {
   diet: Diet
@@ -9,16 +9,10 @@ interface ContainerProps {
 export const Container = styled.View<ContainerProps>`
   flex: 1;
   align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  /* Talvez futuramente retirar */
-  width: 150px;
 
   padding: 16px;
   border-radius: 8px;
-  gap: 16px;
+  gap: 8px;
 
   background-color: ${({ theme, diet }) =>
     diet === 'inside' ? theme.color['green-light'] : theme.color['red-light']};
