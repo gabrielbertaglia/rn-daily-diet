@@ -1,7 +1,6 @@
 import styled from 'styled-components/native'
 
-export type Diet = 'inside' | 'outside' | 'normal'
-
+export type Diet = 'inside' | 'outside'
 interface ContainerProps {
   diet: Diet
 }
