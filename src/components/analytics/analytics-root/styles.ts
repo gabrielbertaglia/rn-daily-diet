@@ -17,3 +17,10 @@ export const Container = styled.TouchableOpacity<AnalyticsRootStyleProps>`
 
   position: relative;
 `
+
+export const ContainerUntouchable = styled.View<AnalyticsRootStyleProps>`
+  width: 100%;
+  background-color: ${({ theme, color }) => theme.color[color]};
+  padding: 20px 16px;
+  border-radius: 8px;
+`

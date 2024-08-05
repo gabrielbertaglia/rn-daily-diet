@@ -9,7 +9,7 @@ export function Statistics() {
   return (
     <Container>
       <Header>
-        <Analytics.Root color="green-light">
+        <Analytics.Root color="green-light" isTouchable={false}>
           <Analytics.Content
             title="90,86%"
             subtitle="das refeições dentro da dieta"

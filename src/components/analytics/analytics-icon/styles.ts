@@ -1,10 +1,11 @@
+import { TouchableOpacityProps } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
-interface ContainerStyleProps {
+interface ContainerStyleProps extends TouchableOpacityProps {
   leftOrRight: 'left' | 'right'
 }
 
-export const Container = styled.View<ContainerStyleProps>`
+export const Container = styled.TouchableOpacity<ContainerStyleProps>`
   position: absolute;
   padding: 4px;
   top: 8px;
