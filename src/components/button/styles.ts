@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 
 export type ButtonVariant = 'primary' | 'secondary'
 
@@ -17,4 +17,14 @@ export const ButtonContainer = styled(TouchableOpacity)<ButtonContainerProps>`
   border-radius: 6px;
   flex-direction: row;
   gap: 12px;
+
+  ${({ theme, variant }) => css`
+    background-color: ${variant === 'secondary'
+      ? 'transparent'
+      : theme.color['gray-200']};
+
+    ${variant === 'secondary' && {
+      border: `1px solid ${theme.color['gray-100']}`,
+    }}
+  `}
 `
