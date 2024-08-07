@@ -1,3 +1,4 @@
+import { Diet } from '@components/card-diet/styles'
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
@@ -21,7 +22,7 @@ export const Divider = styled.View`
 `
 
 interface StatusProps {
-  onADiet: boolean
+  diet: Diet
 }
 
 export const Status = styled.View<StatusProps>`
@@ -29,8 +30,8 @@ export const Status = styled.View<StatusProps>`
   height: 14px;
   border-radius: 999px;
 
-  background-color: ${({ theme, onADiet }) =>
-    onADiet ? theme.color.red : theme.color.green};
+  background-color: ${({ theme, diet }) =>
+    diet === 'outside' ? theme.color.red : theme.color.green};
 
   margin-left: auto;
 `

@@ -1,11 +1,13 @@
+import { Diet } from '@components/card-diet/styles'
 import { compareDesc, parse } from 'date-fns'
 import { meals } from './meals'
 
-interface Meal {
+export interface Meal {
   id: string
   name: string
   time: string
-  onADiet: boolean
+  description: string
+  diet: Diet
 }
 
 interface MealGroup {
@@ -20,7 +22,8 @@ export const listMeal = meals.reduce<MealGroup[]>((acc, current) => {
       id: current.id,
       name: current.name,
       time: current.time,
-      onADiet: current.onADiet,
+      diet: current.diet,
+      description: current.description,
     })
   } else {
     acc.push({
@@ -28,9 +31,10 @@ export const listMeal = meals.reduce<MealGroup[]>((acc, current) => {
       meals: [
         {
           id: current.id,
+          description: current.description,
           name: current.name,
           time: current.time,
-          onADiet: current.onADiet,
+          diet: current.diet,
         },
       ],
     })

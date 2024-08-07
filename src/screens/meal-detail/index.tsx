@@ -12,20 +12,31 @@ import {
   TagStatus,
 } from './styles'
 
+import { useRoute } from '@react-navigation/native'
 import PencilSimpleLine from 'phosphor-react-native/src/icons/PencilSimpleLine'
 import Trash from 'phosphor-react-native/src/icons/Trash'
+import { MealDetail as MealDetailProps } from 'src/@types/meal'
+
+interface RouteMealDetailParams {
+  meal: MealDetailProps
+}
 
 export function MealDetail() {
+  const route = useRoute()
+
+  const { meal } = route.params as RouteMealDetailParams
+  const { date, description, name, diet, time } = meal
+
   return (
     <Container>
       <Header title="Refeição" />
       <Content>
         <ContentDetail>
           <Title fontSize="m" fontFamily="bold">
-            Sanduíche
+            {name}
           </Title>
           <Paragraph color="gray-200" fontSize="m">
-            Sanduíche de pão integral com atum e salada de alface e tomate
+            {description}
           </Paragraph>
         </ContentDetail>
         <ContentDetailTime>
@@ -33,13 +44,13 @@ export function MealDetail() {
             Data e hora
           </Title>
           <Paragraph color="gray-200" fontSize="m">
-            12/08/2022 às 16:00
+            {date} às {time}
           </Paragraph>
         </ContentDetailTime>
         <Tag>
-          <TagStatus />
+          <TagStatus color={diet === 'inside' ? 'green-dark' : 'red-dark'} />
           <Paragraph color="gray-100" fontSize="s">
-            dentro da dieta
+            {diet === 'inside' ? 'dentro da dieta' : 'fora da dieta'}
           </Paragraph>
         </Tag>
 

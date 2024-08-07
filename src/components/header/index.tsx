@@ -1,4 +1,5 @@
 import { Title } from '@components/title'
+import { useNavigation } from '@react-navigation/native'
 import ArrowLeft from 'phosphor-react-native/src/icons/ArrowLeft'
 import { TouchableOpacity } from 'react-native'
 import { Container } from './styles'
@@ -8,9 +9,15 @@ interface HeaderProps {
 }
 
 export function Header({ title }: HeaderProps) {
+  const navigation = useNavigation()
+
+  function handleGoToHome() {
+    navigation.navigate('home')
+  }
+
   return (
     <Container>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleGoToHome}>
         <ArrowLeft />
       </TouchableOpacity>
       <Title

@@ -36,10 +36,14 @@ export const Tag = styled.View`
   gap: 8px;
 `
 
-export const TagStatus = styled.View`
+interface StyledTagStatus {
+  color: 'green-dark' | 'red-dark'
+}
+
+export const TagStatus = styled.View<StyledTagStatus>`
   width: 8px;
   height: 8px;
-  background-color: ${({ theme }) => theme.color['green-dark']};
+  background-color: ${({ theme, color }) => theme.color[color]};
   border-radius: 999px;
 `
 

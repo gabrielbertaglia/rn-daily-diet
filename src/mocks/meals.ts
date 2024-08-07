@@ -1,4 +1,15 @@
-export const meals = [
+import { Diet } from '@components/card-diet/styles'
+
+export interface MealProps {
+  id: string
+  name: string
+  time: string
+  description: string
+  diet: Diet
+  date: string
+}
+
+export const meals: MealProps[] = [
   {
     date: '12/08/2022',
     id: '1',
@@ -6,7 +17,7 @@ export const meals = [
     time: '10:00',
     description:
       'Sanduíche de pão integral com atum e salada de alface e tomate',
-    onADiet: true,
+    diet: 'inside',
   },
   {
     date: '12/08/2022',
@@ -15,7 +26,7 @@ export const meals = [
     time: '10:00',
     description:
       'Sanduíche de pão integral com atum e salada de alface e tomate',
-    onADiet: false,
+    diet: 'outside',
   },
   {
     date: '11/08/2022',
@@ -23,7 +34,7 @@ export const meals = [
     name: 'X-tudo',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: false,
+    diet: 'inside',
   },
   {
     date: '11/08/2022',
@@ -31,7 +42,7 @@ export const meals = [
     name: 'X-tudo',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: false,
+    diet: 'outside',
   },
   {
     date: '13/08/2022',
@@ -39,7 +50,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'outside',
   },
   {
     date: '16/08/2022',
@@ -47,7 +58,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'inside',
   },
   {
     date: '17/08/2022',
@@ -55,7 +66,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'outside',
   },
   {
     date: '18/08/2022',
@@ -63,7 +74,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'inside',
   },
   {
     date: '19/08/2022',
@@ -71,7 +82,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'outside',
   },
   {
     date: '20/08/2022',
@@ -79,7 +90,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'inside',
   },
   {
     date: '20/08/2022',
@@ -87,7 +98,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'outside',
   },
   {
     date: '20/08/2022',
@@ -95,7 +106,7 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'inside',
   },
   {
     date: '21/08/2022',
@@ -103,6 +114,6 @@ export const meals = [
     name: 'X-Nadinha',
     time: '20:00',
     description: 'Xis completo da lancheria do bairro',
-    onADiet: true,
+    diet: 'outside',
   },
 ]

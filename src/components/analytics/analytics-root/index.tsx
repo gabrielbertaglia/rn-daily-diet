@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
-// import { defaultColorToAnalytics } from '..'
-import { ViewProps } from 'react-native'
+import { TouchableOpacityProps, ViewProps } from 'react-native'
 import {
   ColorAnalyticsRootStyleType,
   Container,
@@ -13,21 +12,29 @@ interface AnalyticsRootProps extends ViewProps {
   isTouchable: boolean
 }
 
+interface AnalyticsRootTouchableProps extends TouchableOpacityProps {
+  children: ReactNode
+  color?: ColorAnalyticsRootStyleType
+  isTouchable: boolean
+}
+
+type AnalyticsRootAllProps = AnalyticsRootProps & AnalyticsRootTouchableProps
+
 export function AnalyticsRoot({
   children,
   color = 'gray-600',
   isTouchable = true,
   ...rest
-}: AnalyticsRootProps) {
+}: AnalyticsRootAllProps) {
   if (!isTouchable) {
     return (
-      <ContainerUntouchable color={color} {...rest}>
+      <ContainerUntouchable color={color} {...(rest as ViewProps)}>
         {children}
       </ContainerUntouchable>
     )
   }
   return (
-    <Container color={color} {...rest}>
+    <Container color={color} {...(rest as TouchableOpacityProps)}>
       {children}
     </Container>
   )

@@ -4,8 +4,10 @@ import { Header } from '@components/header'
 import { Input } from '@components/input'
 import { ButtonInDiet } from '@components/select-button'
 import { Title } from '@components/title'
+import { useRoute } from '@react-navigation/native'
 import { useState } from 'react'
 import { View } from 'react-native'
+import { MealDetail } from 'src/@types/meal'
 import {
   ButtonContainer,
   ButtonInDietContainer,
@@ -15,13 +17,21 @@ import {
   Row,
 } from './styles'
 
+interface RouteMealParams {
+  meal: MealDetail | null
+}
+
 export function Meal() {
   const [selected, setSelected] = useState<Diet | null>(null)
+
+  const route = useRoute()
+
+  const { meal } = route.params as RouteMealParams
 
   return (
     <>
       <Container>
-        <Header title="Nova refeição" />
+        <Header title={meal === null ? 'Nova refeição' : 'Editar refeição'} />
         <Form>
           <Input title="Name" />
           <View
@@ -70,7 +80,7 @@ export function Meal() {
           </ButtonInDietContainer>
           <ButtonContainer>
             <Button fullWidth color="white" fontSize="m" fontFamily="bold">
-              Cadastrar refeição
+              {meal === null ? 'Cadastrar refeição' : 'Salvar refeição'}
             </Button>
           </ButtonContainer>
         </Form>

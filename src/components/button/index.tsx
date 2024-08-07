@@ -1,10 +1,11 @@
 import { Paragraph, ParagraphProps } from '@components/paragraph'
 import { ReactNode } from 'react'
+import { TouchableOpacityProps } from 'react-native'
 import styled from 'styled-components'
 import { NativeTarget, useTheme } from 'styled-components/native'
 import { ButtonContainer, ButtonVariant } from './styles'
 
-interface ButtonProps extends ParagraphProps {
+interface ButtonProps extends ParagraphProps, TouchableOpacityProps {
   children: ReactNode
   variant?: ButtonVariant
   fullWidth?: boolean
@@ -19,6 +20,7 @@ export function Button({
   fontSize = 's',
   fontFamily = 'regular',
   icon: IconTarget,
+  ...rest
 }: ButtonProps) {
   const theme = useTheme()
   const StyledIcon =
@@ -32,7 +34,7 @@ export function Button({
     `
 
   return (
-    <ButtonContainer fullWidth={fullWidth} variant={variant}>
+    <ButtonContainer fullWidth={fullWidth} variant={variant} {...rest}>
       {StyledIcon && <StyledIcon />}
       <Paragraph color={color} fontSize={fontSize} fontFamily={fontFamily}>
         {children}
