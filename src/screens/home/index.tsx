@@ -25,7 +25,7 @@ export function Home() {
         <Avatar source={LogoAvatar} />
       </HeaderContent>
 
-      <Analytics.Root color="green-light">
+      <Analytics.Root isTouchable color="green-light">
         <Analytics.Content
           title="90,86%"
           subtitle="das refeições dentro da dieta"

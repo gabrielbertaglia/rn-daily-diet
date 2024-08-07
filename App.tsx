@@ -4,7 +4,7 @@ import {
   NunitoSans_700Bold,
   useFonts,
 } from '@expo-google-fonts/nunito-sans'
-import { Meal } from '@screens/meal'
+import { Feedback } from '@screens/feedback'
 import { Text, View } from 'react-native'
 import theme from 'src/theme'
 import { ThemeProvider } from 'styled-components'
@@ -18,7 +18,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       {fontsLoaded ? (
         // <Routes />
-        <Meal />
+        <Feedback />
       ) : (
         <View>
           <Text>Carregando</Text>
