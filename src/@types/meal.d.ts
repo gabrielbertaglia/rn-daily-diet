@@ -6,5 +6,5 @@ export interface MealDetail {
   description: string
   date: string
   time: string
-  diet: Diet
+  diet: Diet | null
 }

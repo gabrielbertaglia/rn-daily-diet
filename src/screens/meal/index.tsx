@@ -1,28 +1,16 @@
-import { Button } from '@components/button'
-import { Diet } from '@components/card-diet/styles'
+import { FormMeal } from '@components/form-meal'
 import { Header } from '@components/header'
-import { Input } from '@components/input'
-import { ButtonInDiet } from '@components/select-button'
-import { Title } from '@components/title'
 import { useRoute } from '@react-navigation/native'
-import { useState } from 'react'
-import { View } from 'react-native'
 import { MealDetail } from 'src/@types/meal'
-import {
-  ButtonContainer,
-  ButtonInDietContainer,
-  Column,
-  Container,
-  Form,
-  Row,
-} from './styles'
+import { Container } from './styles'
 
-interface RouteMealParams {
+export interface RouteMealParams {
   meal: MealDetail | null
 }
 
 export function Meal() {
-  const [selected, setSelected] = useState<Diet | null>(null)
+  // const [selected, setSelected] = useState<Diet | null>(null)
+  // const { control, handleSubmit } = useForm()
 
   const route = useRoute()
 
@@ -32,7 +20,8 @@ export function Meal() {
     <>
       <Container>
         <Header title={meal === null ? 'Nova refeição' : 'Editar refeição'} />
-        <Form>
+        <FormMeal meal={meal} />
+        {/* <Form>
           <Input title="Name" />
           <View
             style={{
@@ -83,7 +72,7 @@ export function Meal() {
               {meal === null ? 'Cadastrar refeição' : 'Salvar refeição'}
             </Button>
           </ButtonContainer>
-        </Form>
+        </Form> */}
       </Container>
     </>
   )

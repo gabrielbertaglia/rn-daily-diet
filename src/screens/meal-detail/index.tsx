@@ -12,7 +12,7 @@ import {
   TagStatus,
 } from './styles'
 
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import PencilSimpleLine from 'phosphor-react-native/src/icons/PencilSimpleLine'
 import Trash from 'phosphor-react-native/src/icons/Trash'
 import { MealDetail as MealDetailProps } from 'src/@types/meal'
@@ -23,9 +23,27 @@ interface RouteMealDetailParams {
 
 export function MealDetail() {
   const route = useRoute()
+  const navigation = useNavigation()
 
   const { meal } = route.params as RouteMealDetailParams
-  const { date, description, name, diet, time } = meal
+  const { date, description, name, diet, time, id } = meal
+
+  const mealDetail: MealDetailProps = {
+    date,
+    description,
+    diet,
+    id,
+    name,
+    time,
+  }
+
+  function handleEditMeal() {
+    navigation.navigate('meal', { meal: mealDetail })
+  }
+
+  function handleRemoveMeal() {
+    console.log('excluir')
+  }
 
   return (
     <Container>
@@ -61,6 +79,7 @@ export function MealDetail() {
             color="white"
             fontFamily="bold"
             icon={PencilSimpleLine}
+            onPress={handleEditMeal}
           >
             Editar refeição
           </Button>
@@ -71,6 +90,7 @@ export function MealDetail() {
             color="gray-100"
             fontFamily="bold"
             icon={Trash}
+            onPress={handleRemoveMeal}
           >
             Excluir refeição
           </Button>

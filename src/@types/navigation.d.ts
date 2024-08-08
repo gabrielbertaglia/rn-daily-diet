@@ -1,4 +1,4 @@
-import { Meal } from './meal'
+import { MealDetail } from './meal'
 
 export declare global {
   namespace ReactNavigation {
@@ -6,13 +6,13 @@ export declare global {
       home: undefined
       statistics: undefined
       meal: {
-        meal: Meal | null
+        meal: MealDetail | null
       }
       feedback: {
         diet: 'inside' | 'outside'
       }
       'meal-detail': {
-        meal: Meal
+        meal: MealDetail
       }
     }
   }

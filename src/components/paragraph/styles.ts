@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native'
 
 export type FontSizeType = 'xs' | 's' | 'm'
 export type FontFamilyType = 'regular' | 'bold'
-export type ColorType = 'white' | 'gray-200' | 'gray-100'
+export type ColorType = 'white' | 'gray-200' | 'gray-100' | 'red-dark'
 
 interface ParagraphStyleProps {
   fontSize: FontSizeType
