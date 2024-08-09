@@ -3,6 +3,7 @@ import { Input } from '@components/input'
 import { Title } from '@components/title'
 import { Alert, View } from 'react-native'
 
+import { KeyboardAvoidingContainer } from '@components/KeyboardAvoidingContainer'
 import { Paragraph } from '@components/paragraph'
 import { ButtonInDiet } from '@components/select-button'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -107,90 +108,56 @@ export function FormMeal({ meal }: RouteMealParams) {
 
   return (
     <Form>
-      <Controller
-        control={control}
-        name="name"
-        render={({ field: { onChange, value } }) => (
-          <Input
-            error={errors.name?.message}
-            title="Nome"
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-      />
-      <View
-        style={{
-          paddingVertical: 24,
-        }}
-      >
+      {/* <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      > */}
+      <KeyboardAvoidingContainer>
         <Controller
           control={control}
-          name="description"
+          name="name"
           render={({ field: { onChange, value } }) => (
             <Input
-              textAlignVertical="top"
-              error={errors.description?.message}
-              title="Descrição"
-              multiline
+              error={errors.name?.message}
+              title="Nome"
               onChangeText={onChange}
               value={value}
-              numberOfLines={4}
             />
           )}
         />
-      </View>
-
-      <Row>
-        <Column>
-          <Controller
-            control={control}
-            name="date"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                title="Data"
-                error={errors.date?.message}
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
-        </Column>
-        <Column>
-          <Controller
-            control={control}
-            name="time"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                title="Hora"
-                error={errors.time?.message}
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
-        </Column>
-      </Row>
-      <ButtonInDietContainer>
-        <Title
-          fontSize="xs"
+        <View
           style={{
-            marginBottom: 8,
+            paddingVertical: 24,
           }}
         >
-          Está dentro da dieta?
-        </Title>
+          <Controller
+            control={control}
+            name="description"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                textAlignVertical="top"
+                error={errors.description?.message}
+                title="Descrição"
+                multiline
+                onChangeText={onChange}
+                value={value}
+                numberOfLines={4}
+              />
+            )}
+          />
+        </View>
+
         <Row>
           <Column>
             <Controller
               control={control}
-              name="diet"
+              name="date"
               render={({ field: { onChange, value } }) => (
-                <ButtonInDiet
-                  diet="inside"
-                  title="Sim"
-                  selected={value === Diet.inside}
-                  onPress={() => onChange(Diet.inside)}
+                <Input
+                  title="Data"
+                  error={errors.date?.message}
+                  value={value}
+                  onChangeText={onChange}
                 />
               )}
             />
@@ -198,24 +165,64 @@ export function FormMeal({ meal }: RouteMealParams) {
           <Column>
             <Controller
               control={control}
-              name="diet"
+              name="time"
               render={({ field: { onChange, value } }) => (
-                <ButtonInDiet
-                  diet="outside"
-                  title="Não"
-                  selected={value === Diet.outside}
-                  onPress={() => onChange(Diet.outside)}
+                <Input
+                  title="Hora"
+                  error={errors.time?.message}
+                  value={value}
+                  onChangeText={onChange}
                 />
               )}
             />
           </Column>
         </Row>
-        {errors.diet && (
-          <Paragraph color="red-dark" fontSize="s">
-            {errors.diet.message}
-          </Paragraph>
-        )}
-      </ButtonInDietContainer>
+        <ButtonInDietContainer>
+          <Title
+            fontSize="xs"
+            style={{
+              marginBottom: 8,
+            }}
+          >
+            Está dentro da dieta?
+          </Title>
+          <Row>
+            <Column>
+              <Controller
+                control={control}
+                name="diet"
+                render={({ field: { onChange, value } }) => (
+                  <ButtonInDiet
+                    diet="inside"
+                    title="Sim"
+                    selected={value === Diet.inside}
+                    onPress={() => onChange(Diet.inside)}
+                  />
+                )}
+              />
+            </Column>
+            <Column>
+              <Controller
+                control={control}
+                name="diet"
+                render={({ field: { onChange, value } }) => (
+                  <ButtonInDiet
+                    diet="outside"
+                    title="Não"
+                    selected={value === Diet.outside}
+                    onPress={() => onChange(Diet.outside)}
+                  />
+                )}
+              />
+            </Column>
+          </Row>
+          {errors.diet && (
+            <Paragraph color="red-dark" fontSize="s">
+              {errors.diet.message}
+            </Paragraph>
+          )}
+        </ButtonInDietContainer>
+      </KeyboardAvoidingContainer>
       <ButtonContainer>
         <Button
           fullWidth

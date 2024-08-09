@@ -27,6 +27,7 @@ export const Form = styled.View`
 export const ButtonInDietContainer = styled.View`
   flex-direction: column;
   padding-top: 24px;
+  padding-bottom: 24px;
 `
 
 export const ButtonContainer = styled.View`
