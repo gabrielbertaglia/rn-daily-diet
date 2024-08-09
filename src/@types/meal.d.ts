@@ -7,4 +7,5 @@ export interface MealDetail {
   date: string
   time: string
   diet: Diet | null
+  createdAt: string
 }

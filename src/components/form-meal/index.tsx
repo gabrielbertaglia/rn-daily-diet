@@ -12,7 +12,7 @@ import { RouteMealParams } from '@screens/meal'
 import { createMeal } from '@storage/meal/create-meal'
 import { editMeal } from '@storage/meal/edit-meal'
 import { AppError } from '@utils/app-error'
-import { isValid, parse } from 'date-fns'
+import { formatISO, isValid, parse } from 'date-fns'
 import { Controller, useForm } from 'react-hook-form'
 import uuid from 'react-native-uuid'
 import { z } from 'zod'
@@ -92,7 +92,10 @@ export function FormMeal({ meal }: RouteMealParams) {
   async function handleCreateOrEditMeal(data: ConfirmMealFormData) {
     if (meal) {
       try {
-        await editMeal({ ...data, id: meal.id }, meal.id)
+        await editMeal(
+          { ...data, id: meal.id, createdAt: meal.createdAt },
+          meal.id,
+        )
         navigation.navigate('home')
       } catch (error) {
         if (error instanceof AppError) {
@@ -106,8 +109,8 @@ export function FormMeal({ meal }: RouteMealParams) {
     }
     try {
       const id = uuid.v4().toString()
-      const meal = { id, ...data }
-
+      const createdAt = formatISO(new Date())
+      const meal = { id, createdAt, ...data }
       await createMeal(meal)
       navigation.navigate('feedback', { diet: data.diet })
       reset(defaultValues)
