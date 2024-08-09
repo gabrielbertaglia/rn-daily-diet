@@ -87,14 +87,10 @@ export function FormMeal({ meal }: RouteMealParams) {
     reset,
   } = mealForm
 
-  console.log('errors', errors)
-
   async function handleCreateOrEditMeal(data: ConfirmMealFormData) {
     try {
       const id = uuid.v4().toString()
       const meal = { id, ...data }
-
-      console.log('meal', meal)
 
       await createMeal(meal)
       navigation.navigate('feedback', { diet: data.diet })
@@ -206,7 +202,7 @@ export function FormMeal({ meal }: RouteMealParams) {
               render={({ field: { onChange, value } }) => (
                 <ButtonInDiet
                   diet="outside"
-                  title="Sim"
+                  title="Não"
                   selected={value === Diet.outside}
                   onPress={() => onChange(Diet.outside)}
                 />

@@ -12,9 +12,12 @@ import {
   TagStatus,
 } from './styles'
 
+import { Alert } from '@components/alert'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { removeMeal } from '@storage/meal/remove-meal'
 import PencilSimpleLine from 'phosphor-react-native/src/icons/PencilSimpleLine'
 import Trash from 'phosphor-react-native/src/icons/Trash'
+import { useState } from 'react'
 import { MealDetail as MealDetailProps } from 'src/@types/meal'
 
 interface RouteMealDetailParams {
@@ -24,6 +27,8 @@ interface RouteMealDetailParams {
 export function MealDetail() {
   const route = useRoute()
   const navigation = useNavigation()
+
+  const [isModalVisible, setModalVisible] = useState(false)
 
   const { meal } = route.params as RouteMealDetailParams
   const { date, description, name, diet, time, id } = meal
@@ -41,13 +46,19 @@ export function MealDetail() {
     navigation.navigate('meal', { meal: mealDetail })
   }
 
-  function handleRemoveMeal() {
-    console.log('excluir')
+  async function handleRemoveMeal() {
+    await removeMeal(id)
+    navigation.navigate('home')
+  }
+
+  async function alertRemoveMeal() {
+    setModalVisible(true)
   }
 
   return (
     <Container>
       <Header title="Refeição" />
+
       <Content>
         <ContentDetail>
           <Title fontSize="m" fontFamily="bold">
@@ -90,11 +101,17 @@ export function MealDetail() {
             color="gray-100"
             fontFamily="bold"
             icon={Trash}
-            onPress={handleRemoveMeal}
+            onPress={alertRemoveMeal}
           >
             Excluir refeição
           </Button>
         </ContentButton>
+        <Alert
+          title="Deseja realmente excluir o registro da refeição?"
+          isModalVisible={isModalVisible}
+          onAccept={handleRemoveMeal}
+          onReject={() => setModalVisible(false)}
+        />
       </Content>
     </Container>
   )

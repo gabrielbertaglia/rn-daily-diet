@@ -10,6 +10,7 @@ interface ButtonProps extends ParagraphProps, TouchableOpacityProps {
   variant?: ButtonVariant
   fullWidth?: boolean
   icon?: NativeTarget
+  flex?: boolean
 }
 
 export function Button({
@@ -20,6 +21,7 @@ export function Button({
   fontSize = 's',
   fontFamily = 'regular',
   icon: IconTarget,
+  flex = false,
   ...rest
 }: ButtonProps) {
   const theme = useTheme()
@@ -34,7 +36,12 @@ export function Button({
     `
 
   return (
-    <ButtonContainer fullWidth={fullWidth} variant={variant} {...rest}>
+    <ButtonContainer
+      flex={flex}
+      fullWidth={fullWidth}
+      variant={variant}
+      {...rest}
+    >
       {StyledIcon && <StyledIcon />}
       <Paragraph color={color} fontSize={fontSize} fontFamily={fontFamily}>
         {children}

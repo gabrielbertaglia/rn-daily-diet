@@ -6,9 +6,11 @@ export type ButtonVariant = 'primary' | 'secondary'
 interface ButtonContainerProps {
   variant: ButtonVariant
   fullWidth: boolean
+  flex: boolean
 }
 
 export const ButtonContainer = styled(TouchableOpacity)<ButtonContainerProps>`
+  ${({ flex }) => flex && 'flex: 1;'}
   align-self: ${({ fullWidth }) => (fullWidth ? 'auto' : 'flex-start')};
   justify-content: center;
   align-items: center;
