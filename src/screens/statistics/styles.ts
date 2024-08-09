@@ -5,9 +5,15 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.color['green-light']};
 `
 
-export const Header = styled.View`
+export type ColorHeaderStyleType = 'red-light' | 'green-light'
+
+interface StyleHeader {
+  color: ColorHeaderStyleType
+}
+
+export const Header = styled.View<StyleHeader>`
   padding: 32px 16px;
-  background-color: ${({ theme }) => theme.color['green-light']};
+  background-color: ${({ theme, color }) => theme.color[color]};
 `
 
 export const Content = styled.View`

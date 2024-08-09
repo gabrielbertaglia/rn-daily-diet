@@ -4,6 +4,7 @@ import { DayListCard } from '@components/day-list-card'
 import { Paragraph } from '@components/paragraph'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { getAllMeals } from '@storage/meal/get-all-meals'
+import { calculateDietPercentage } from '@utils/calculate-diet-percentage'
 import { groupMealsByDate, Meal } from '@utils/group-meals-by-date'
 import ArrowUpRight from 'phosphor-react-native/src/icons/ArrowUpRight'
 import Plus from 'phosphor-react-native/src/icons/Plus'
@@ -26,8 +27,10 @@ export function Home() {
   const navigation = useNavigation()
   const groupedMeals = groupMealsByDate(meals)
 
+  const { title, subtitle, percentage } = calculateDietPercentage(meals)
+
   function handleSeeStatistics() {
-    navigation.navigate('statistics')
+    navigation.navigate('statistics', { meals })
   }
 
   function handleNewMeal() {
@@ -60,14 +63,14 @@ export function Home() {
 
       <Analytics.Root
         isTouchable
-        color="green-light"
+        color={percentage >= 50 ? 'green-light' : 'red-light'}
         onPress={handleSeeStatistics}
       >
-        <Analytics.Content
-          title="90,86%"
-          subtitle="das refeições dentro da dieta"
+        <Analytics.Content title={title} subtitle={subtitle} />
+        <Analytics.Action
+          icon={ArrowUpRight}
+          color={percentage >= 50 ? 'green-dark' : 'red-dark'}
         />
-        <Analytics.Action icon={ArrowUpRight} color="green-dark" />
       </Analytics.Root>
 
       <NewMealContent>
