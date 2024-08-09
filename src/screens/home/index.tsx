@@ -29,8 +29,6 @@ export function Home() {
 
   const { title, subtitle, percentage } = calculateDietPercentage(meals)
 
-  console.log(meals)
-
   function handleSeeStatistics() {
     navigation.navigate('statistics', { meals })
   }

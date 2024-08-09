@@ -3,7 +3,7 @@ import { Input } from '@components/input'
 import { Title } from '@components/title'
 import { Alert, View } from 'react-native'
 
-import { KeyboardAvoidingContainer } from '@components/KeyboardAvoidingContainer'
+import { KeyboardAvoidingContainer } from '@components/keyboard-avoiding-container'
 import { Paragraph } from '@components/paragraph'
 import { ButtonInDiet } from '@components/select-button'
 import { zodResolver } from '@hookform/resolvers/zod'

@@ -1,5 +1,9 @@
-import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native'
 
 interface KeyboardAvoidingContainerProps {
   children: React.ReactNode
@@ -13,8 +17,9 @@ export function KeyboardAvoidingContainer({
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 200}
       >
-        <ScrollView>{children}</ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled">{children}</ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
