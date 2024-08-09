@@ -3,6 +3,7 @@ import { Input } from '@components/input'
 import { Title } from '@components/title'
 import { Alert, View } from 'react-native'
 
+import { InputMask } from '@components/input-mask'
 import { KeyboardAvoidingContainer } from '@components/keyboard-avoiding-container'
 import { Paragraph } from '@components/paragraph'
 import { ButtonInDiet } from '@components/select-button'
@@ -126,10 +127,6 @@ export function FormMeal({ meal }: RouteMealParams) {
 
   return (
     <Form>
-      {/* <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
-      > */}
       <KeyboardAvoidingContainer>
         <Controller
           control={control}
@@ -171,6 +168,21 @@ export function FormMeal({ meal }: RouteMealParams) {
               control={control}
               name="date"
               render={({ field: { onChange, value } }) => (
+                <InputMask
+                  onChangeText={onChange}
+                  value={value}
+                  title="Data"
+                  type="datetime"
+                  options={{
+                    format: 'DD/MM/YYYY',
+                  }}
+                />
+              )}
+            />
+            {/* <Controller
+              control={control}
+              name="date"
+              render={({ field: { onChange, value } }) => (
                 <Input
                   title="Data"
                   error={errors.date?.message}
@@ -178,18 +190,21 @@ export function FormMeal({ meal }: RouteMealParams) {
                   onChangeText={onChange}
                 />
               )}
-            />
+            /> */}
           </Column>
           <Column>
             <Controller
               control={control}
               name="time"
               render={({ field: { onChange, value } }) => (
-                <Input
-                  title="Hora"
-                  error={errors.time?.message}
-                  value={value}
+                <InputMask
                   onChangeText={onChange}
+                  value={value}
+                  title="Hora"
+                  type="datetime"
+                  options={{
+                    format: 'HH:MM',
+                  }}
                 />
               )}
             />
