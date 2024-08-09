@@ -1,13 +1,18 @@
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Title } from '@components/title'
-import { View } from 'react-native'
+import { Alert, View } from 'react-native'
 
 import { Paragraph } from '@components/paragraph'
 import { ButtonInDiet } from '@components/select-button'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigation } from '@react-navigation/native'
 import { RouteMealParams } from '@screens/meal'
+import { createMeal } from '@storage/meal/create-meal'
+import { AppError } from '@utils/app-error'
+import { isValid, parse } from 'date-fns'
 import { Controller, useForm } from 'react-hook-form'
+import uuid from 'react-native-uuid'
 import { z } from 'zod'
 import {
   ButtonContainer,
@@ -25,8 +30,18 @@ enum Diet {
 const mealFormValidation = z.object({
   name: z.string().min(1, 'Informe o nome da refeição'),
   description: z.string().min(1, 'Informe a descrição da refeição'),
-  date: z.string().date('Informe a data'),
-  time: z.string().time('Informe o horário'),
+  date: z.string().refine((value) => {
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/
+    if (!dateRegex.test(value)) {
+      return false
+    }
+    const date = parse(value, 'dd/MM/yyyy', new Date())
+    return isValid(date)
+  }, 'Informe a data'),
+  time: z.string().refine((value) => {
+    const [hours, minutes] = value.split(':')
+    return isValid(new Date(0, 0, 0, parseInt(hours), parseInt(minutes)))
+  }, 'Informe o horário'),
   diet: z.nativeEnum(Diet, {
     errorMap: () => {
       return { message: 'Informe se está dentro da dieta ou não' }
@@ -39,20 +54,29 @@ export type MealType = z.infer<typeof mealFormValidation>
 type ConfirmMealFormData = MealType
 
 export function FormMeal({ meal }: RouteMealParams) {
-  console.log('meal', meal?.name ?? '')
+  const navigation = useNavigation()
+
+  const defaultValues = {
+    name: '',
+    description: '',
+    date: '',
+    time: '',
+    diet: undefined,
+  }
+
   const mealForm = useForm<ConfirmMealFormData>({
     resolver: zodResolver(mealFormValidation),
     defaultValues: {
-      name: meal?.name ?? '',
-      date: meal?.date ?? '',
-      time: meal?.time ?? '',
-      description: meal?.description ?? '',
+      name: meal?.name ?? defaultValues.name,
+      date: meal?.date ?? defaultValues.date,
+      time: meal?.time ?? defaultValues.time,
+      description: meal?.description ?? defaultValues.description,
       diet:
         meal?.diet === 'inside'
           ? Diet.inside
           : meal?.diet === 'outside'
             ? Diet.outside
-            : undefined,
+            : defaultValues.diet,
     },
   })
 
@@ -60,12 +84,29 @@ export function FormMeal({ meal }: RouteMealParams) {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = mealForm
 
-  console.log('errors', errors.diet)
+  console.log('errors', errors)
 
-  function handleCreateOrEditMeal(data: ConfirmMealFormData) {
-    console.log('data', data)
+  async function handleCreateOrEditMeal(data: ConfirmMealFormData) {
+    try {
+      const id = uuid.v4().toString()
+      const meal = { id, ...data }
+
+      console.log('meal', meal)
+
+      await createMeal(meal)
+      navigation.navigate('feedback', { diet: data.diet })
+      reset(defaultValues)
+    } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert('Nova refeição', error.message)
+        return
+      }
+      Alert.alert('Nova refeição', 'Não foi possível criar uma refeição')
+      console.log(error)
+    }
   }
 
   return (

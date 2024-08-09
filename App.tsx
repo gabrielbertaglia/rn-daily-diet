@@ -9,6 +9,8 @@ import { Text, View } from 'react-native'
 import theme from 'src/theme'
 import { ThemeProvider } from 'styled-components'
 
+import 'react-native-get-random-values'
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     NunitoSans_400Regular,
