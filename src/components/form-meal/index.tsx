@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import { RouteMealParams } from '@screens/meal'
 import { createMeal } from '@storage/meal/create-meal'
+import { editMeal } from '@storage/meal/edit-meal'
 import { AppError } from '@utils/app-error'
 import { isValid, parse } from 'date-fns'
 import { Controller, useForm } from 'react-hook-form'
@@ -89,6 +90,20 @@ export function FormMeal({ meal }: RouteMealParams) {
   } = mealForm
 
   async function handleCreateOrEditMeal(data: ConfirmMealFormData) {
+    if (meal) {
+      try {
+        await editMeal({ ...data, id: meal.id }, meal.id)
+        navigation.navigate('home')
+      } catch (error) {
+        if (error instanceof AppError) {
+          Alert.alert('Editar refeição', error.message)
+          return
+        }
+        Alert.alert('Editar refeição', 'Não foi possível editar a refeição')
+        console.log(error)
+      }
+      return
+    }
     try {
       const id = uuid.v4().toString()
       const meal = { id, ...data }
