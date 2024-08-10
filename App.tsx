@@ -5,7 +5,7 @@ import {
   useFonts,
 } from '@expo-google-fonts/nunito-sans'
 import { Routes } from '@routes/index'
-import { Text, View } from 'react-native'
+import { StatusBar, Text, View } from 'react-native'
 import theme from 'src/theme'
 import { ThemeProvider } from 'styled-components'
 
@@ -18,6 +18,11 @@ export default function App() {
   })
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
       {fontsLoaded ? (
         <Routes />
       ) : (
