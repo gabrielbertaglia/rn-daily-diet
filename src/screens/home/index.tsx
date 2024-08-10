@@ -2,6 +2,7 @@ import { Analytics } from '@components/analytics'
 import { Button } from '@components/button'
 import { DayListCard } from '@components/day-list-card'
 import { Paragraph } from '@components/paragraph'
+import { Title } from '@components/title'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { getAllMeals } from '@storage/meal/get-all-meals'
 import { calculateDietPercentage } from '@utils/calculate-diet-percentage'
@@ -9,7 +10,7 @@ import { groupMealsByDate, Meal } from '@utils/group-meals-by-date'
 import ArrowUpRight from 'phosphor-react-native/src/icons/ArrowUpRight'
 import Plus from 'phosphor-react-native/src/icons/Plus'
 import { useCallback, useState } from 'react'
-import { FlatList } from 'react-native'
+import { SectionList } from 'react-native'
 import LogoImg from '../../assets/logo.png'
 import LogoAvatar from '../../assets/me.jpg'
 import {
@@ -89,10 +90,23 @@ export function Home() {
         </Button>
       </NewMealContent>
       <DayList>
-        <FlatList
-          data={groupedMeals}
-          renderItem={({ item }) => <DayListCard listMeal={item} />}
-          showsVerticalScrollIndicator={false}
+        <SectionList
+          style={{
+            paddingBottom: 32,
+          }}
+          sections={groupedMeals}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <DayListCard data={item} />}
+          renderSectionHeader={({ section: { date } }) => (
+            <Title
+              fontSize="s"
+              style={{
+                paddingTop: 32,
+              }}
+            >
+              {date}
+            </Title>
+          )}
         />
       </DayList>
     </Container>

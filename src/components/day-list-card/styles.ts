@@ -1,9 +1,7 @@
 import { Diet } from '@components/card-diet/styles'
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
-  padding-top: 32px;
-`
+export const Container = styled.View``
 
 export const MealCard = styled.TouchableOpacity`
   padding: 12px;

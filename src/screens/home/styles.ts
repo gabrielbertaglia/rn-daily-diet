@@ -23,7 +23,6 @@ export const Avatar = styled.Image`
   height: 40px;
   border: 2px solid ${({ theme }) => theme.color['gray-200']};
   border-radius: 999px;
-  filter: grayscale(100%);
 `
 
 export const NewMealContent = styled.View`
@@ -32,8 +31,5 @@ export const NewMealContent = styled.View`
 `
 
 export const DayList = styled.View`
-  /* padding-top: 4px; */
-  margin-top: 16px;
-  /* gap: 12px; */
   flex: 1;
 `

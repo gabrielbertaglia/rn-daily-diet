@@ -13,7 +13,7 @@ export interface Meal {
 
 export interface MealGroup {
   date: string
-  meals: Meal[]
+  data: Meal[]
 }
 
 export function groupMealsByDate(meals: Meal[]): MealGroup[] {
@@ -26,9 +26,9 @@ export function groupMealsByDate(meals: Meal[]): MealGroup[] {
       const existingGroup = acc.find((group) => group.date === date)
 
       if (existingGroup) {
-        existingGroup.meals.push(current)
+        existingGroup.data.push(current)
       } else {
-        acc.push({ date, meals: [current] })
+        acc.push({ date, data: [current] })
       }
 
       return acc
@@ -40,7 +40,8 @@ export function groupMealsByDate(meals: Meal[]): MealGroup[] {
     })
     .map((group) => ({
       ...group,
-      meals: group.meals.sort((a, b) => {
+      date: format(parse(group.date, 'dd/MM/yyyy', new Date()), 'dd.MM.yy'),
+      data: group.data.sort((a, b) => {
         const baseDate = (date: string) =>
           format(parse(date, 'dd/MM/yyyy', new Date()), 'yyyy-MM-dd')
         const dateTimeA = parseISO(`${baseDate(a.date)}T${a.time}:00.000Z`)
